@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item android:title="Dietary Types">
+        <menu>
+            <item
+                android:id="@+id/nav_home"
+                android:icon="@mipmap/ic_launcher_home_foreground"
+                android:title="Home" />
+
+            <item
+                android:id="@+id/nav_halal"
+                android:icon="@mipmap/ic_launcher_halal_foreground"
+                android:title="Halal" />
+
+            <item
+                android:id="@+id/nav_vegetarian"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Vegetarian" />
+
+            <item
+            android:id="@+id/nav_vegan"
+            android:icon="@drawable/ic_menu_send"
+            android:title="Vegan" />
+
+            <item
+                android:id="@+id/nav_peanutFree"
+                android:icon="@drawable/ic_menu_send"
+                android:title="Peanut-Free" />
+        </menu>
+    </item>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="@string/menu_share" />
+            <item
+                android:id="@+id/nav_send"
+                android:icon="@drawable/ic_menu_send"
+                android:title="@string/menu_send" />
+        </menu>
+    </item>
+
+</menu>
