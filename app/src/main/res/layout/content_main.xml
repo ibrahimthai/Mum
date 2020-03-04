@@ -17,4 +17,61 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/mobile_navigation" />
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.937"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/nav_host_fragment"
+        app:layout_constraintVertical_bias="0.948"
+        app:menu_fab_label=""
+        app:menu_icon="@mipmap/ic_launcher_search_foreground"
+        app:menu_openDirection="up"
+        app:menu_showShadow="true"
+        app:menu_colorNormal="#05A105"
+        >
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/searchDessert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher_dessert_foreground"
+            app:fabSize="mini"
+            app:fab_colorNormal="#2DA0E2"
+            app:fab_label="Dessert" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/searchDinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher_dinner_foreground"
+            app:fabSize="mini"
+            app:fab_colorNormal="#2DA0E2"
+            app:fab_label="Dinner" />
+
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/searchLunch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher_lunch_foreground"
+            app:fabSize="mini"
+            app:fab_colorNormal="#2DA0E2"
+            app:fab_label="Lunch" />
+
+        <com.github.clans.fab.FloatingActionButton
+            android:id="@+id/searchBreakfast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@mipmap/ic_launcher_breakfast_foreground"
+            app:fabSize="mini"
+            app:fab_colorNormal="#2DA0E2"
+            app:fab_label="Breakfast" />
+
+    </com.github.clans.fab.FloatingActionMenu>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
