@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,26 +14,36 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultNavHost="true"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/mobile_navigation" />
 
+
+    <ListView
+        android:id="@+id/list_view_planetes"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="70dp"
+        android:choiceMode="multipleChoice"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
     <com.github.clans.fab.FloatingActionMenu
+        android:id="@+id/floatingActionMenu2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.937"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/nav_host_fragment"
-        app:layout_constraintVertical_bias="0.948"
+        android:layout_marginTop="270dp"
+        android:layout_marginRight="20dp"
+        android:layout_alignParentRight="true"
+        app:menu_colorNormal="#05A105"
         app:menu_fab_label=""
         app:menu_icon="@mipmap/ic_launcher_search_foreground"
         app:menu_openDirection="up"
-        app:menu_showShadow="true"
-        app:menu_colorNormal="#05A105"
-        >
+        app:menu_showShadow="true">
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/searchDessert"
@@ -74,4 +85,4 @@
     </com.github.clans.fab.FloatingActionMenu>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

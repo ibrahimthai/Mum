@@ -2,8 +2,6 @@ package com.example.mum;
 
 import android.os.Bundle;
 
-import com.github.clans.fab.FloatingActionMenu;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import android.view.View;
@@ -19,12 +17,28 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.CheckBox;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Autocomplete List
     private AppBarConfiguration mAppBarConfiguration;
+    AutoCompleteTextView autocomplete;
+    String[] ingredientList = {
+            "Avocado",
+            "Tomato",
+            "Broccoli",
+            "Onion",
+            "Green Onion"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +48,23 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
+
+        /*
+        autocomplete = findViewById(R.id.autoCompleteTextView1);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>
+                (this,android.R.layout.select_dialog_item, ingredientList);
+        autocomplete.setThreshold(0);
+        autocomplete.setAdapter(adapter);
+        autocomplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selectedItem = (String) parent.getItemAtPosition(position);
+                // here is your selected item
+                System.out.println("You chose" + selectedItem);
+            }
+        });
+
+         */
 
 
 
@@ -61,4 +92,15 @@ public class MainActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+
+
+
+
+
+
+
+
+
+
 }
