@@ -63,7 +63,6 @@
             app:fab_colorNormal="#2DA0E2"
             app:fab_label="Dinner" />
 
-
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/searchLunch"
             android:layout_width="wrap_content"
@@ -81,8 +80,22 @@
             app:fabSize="mini"
             app:fab_colorNormal="#2DA0E2"
             app:fab_label="Breakfast" />
-
     </com.github.clans.fab.FloatingActionMenu>
+
+    <AutoCompleteTextView
+        android:id="@+id/autoCompleteTextView1"
+        android:layout_width="330dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="70dp"
+        android:ems="10"
+        android:hint="  +     Add Ingredient"
+        android:textSize="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.347"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.025" />
 
 
 </RelativeLayout>
