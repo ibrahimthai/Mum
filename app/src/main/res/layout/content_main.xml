@@ -29,7 +29,9 @@
         android:layout_alignParentTop="true"
         android:ems="10"
         android:hint="Add Ingredient"
-        android:textSize="16dp" />
+        android:textSize="16dp"
+        android:lines="1"
+        android:singleLine="true"/>
 
     <ListView
         android:id="@+id/list_view_ingredients"
@@ -96,7 +98,7 @@
         android:orientation="horizontal">
 
         <CheckBox
-            android:id="@+id/chk_select_all"
+            android:id="@+id/selectAll"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"

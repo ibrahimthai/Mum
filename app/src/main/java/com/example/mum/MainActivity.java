@@ -44,10 +44,12 @@ public class MainActivity extends AppCompatActivity {
             "Onion",
             "Green Onion"};
 
+    ArrayList<String> mySelectedList = new ArrayList<>();
+    int addIngredientFlag = 0;
+
     ListView listViewOptions;
     Button btnDeleteItems;
-
-    List<String> selectionList;
+    CheckBox selectAll;
     ArrayAdapter<String> myAdapter;
 
     @Override
@@ -61,8 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Auto-Complete List View Functionality
         autocomplete = findViewById(R.id.autoCompleteTextView1);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                (this,android.R.layout.simple_list_item_multiple_choice, ingredientList);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_multiple_choice, ingredientList);
         autocomplete.setThreshold(0);
         autocomplete.setAdapter(adapter);
         autocomplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -70,7 +71,37 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String selectedItem = (String) parent.getItemAtPosition(position);
                 // here is your selected item
-                System.out.println("You chose" + selectedItem);
+                System.out.println("You chose: " + selectedItem);
+
+                // If list is empty, add an item without going through duplicate check
+                if (mySelectedList.isEmpty()) {
+                    mySelectedList.add(selectedItem);
+                    autocomplete.setText("");
+                }
+                // If something is in the list, check for duplicates before add
+                else if (mySelectedList.size() >= 1) {
+
+                    for (int i = 0; i < mySelectedList.size(); i++) {
+                        if (mySelectedList.get(i).equals(selectedItem)) {
+                            Toast.makeText(getApplicationContext(), "Item already added", Toast.LENGTH_SHORT).show();
+                            autocomplete.setText("");
+                            addIngredientFlag = 0;
+                        }
+                        else {
+                            addIngredientFlag = 1;
+                        }
+                    }
+
+                    // If the selected item doesn't exist
+                    if (addIngredientFlag == 1) {
+                        // Add ingredient to the list
+                        mySelectedList.add(selectedItem);
+                        autocomplete.setText("");
+                        addIngredientFlag = 0;
+                        Toast.makeText(getApplicationContext(), "Added " + selectedItem, Toast.LENGTH_SHORT).show();
+                    }
+                }
+
             }
         });
 
@@ -78,29 +109,56 @@ public class MainActivity extends AppCompatActivity {
 
         // List View Functionality
         listViewOptions = findViewById(R.id.list_view_ingredients);
+        myAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_multiple_choice, mySelectedList);
+        listViewOptions.setAdapter(myAdapter);
 
-        myAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_list_item_multiple_choice, selectionList);
-        listViewOptions.setAdapter(adapter);
+        selectAll = findViewById(R.id.selectAll);
+        selectAll.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
 
+                if (mySelectedList.isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Nothing to select all", Toast.LENGTH_SHORT).show();
+                    selectAll.setChecked(false);
+                    return;
+                }
+
+                if (selectAll.isChecked()){
+                    for ( int i=0; i < listViewOptions.getChildCount(); i++) {
+                        listViewOptions.setItemChecked(i, true);
+                    }
+                }
+                else {
+                    for ( int i=0; i < listViewOptions.getChildCount(); i++) {
+                        listViewOptions.setItemChecked(i, false);
+                    }
+                }
+
+
+
+            }
+        });
+
+        // Delete Button
         btnDeleteItems = findViewById(R.id.deleteButton);
         btnDeleteItems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                selectionList = new ArrayList<>();
                 SparseBooleanArray itemChecked = listViewOptions.getCheckedItemPositions();
                 for (int i = 0; i < itemChecked.size(); i++) {
                     int key = itemChecked.keyAt(i);
                     boolean value = itemChecked.get(key);
                     if(value) {
-                        selectionList.add((listViewOptions.getItemAtPosition(key).toString()));
+                        //mySelectedList.add((listViewOptions.getItemAtPosition(key).toString()));
+                        mySelectedList.remove(listViewOptions.getItemAtPosition(key));
+                        Toast.makeText(getApplicationContext(), "Key: " + listViewOptions.getItemAtPosition(key).toString(), Toast.LENGTH_SHORT).show();
+
                     }
                 }
 
-                if (selectionList.isEmpty()) {
+                if (mySelectedList.isEmpty()) {
                     Toast.makeText(getApplicationContext(), "Nothing is there", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Checked Items: " + selectionList, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Checked Items: ", Toast.LENGTH_SHORT).show();
                 }
             }
         });
