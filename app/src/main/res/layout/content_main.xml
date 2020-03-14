@@ -47,7 +47,7 @@
         android:layout_marginTop="270dp"
         android:layout_marginRight="20dp"
         android:layout_alignParentRight="true"
-        app:menu_colorNormal="#05A105"
+        app:menu_colorNormal="@color/colorPrimary"
         app:menu_fab_label=""
         app:menu_icon="@mipmap/ic_launcher_search_foreground"
         app:menu_openDirection="up"

@@ -14,9 +14,7 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
 
-    <string name="txt_obtener_items">Delete Items</string>
-
-
+    <string name="txt_delete_items">Delete Items</string>
 
 
 </resources>

@@ -1,7 +1,9 @@
 package com.example.mum;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import com.github.clans.fab.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import android.util.SparseBooleanArray;
@@ -52,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
     CheckBox selectAll;
     ArrayAdapter<String> myAdapter;
 
+    FloatingActionButton searchBreakfastBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Auto-Complete List View Functionality
         autocomplete = findViewById(R.id.autoCompleteTextView1);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_multiple_choice, ingredientList);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, ingredientList);
         autocomplete.setThreshold(0);
         autocomplete.setAdapter(adapter);
         autocomplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -162,6 +166,16 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        // Main Menu -> Search Breakfast Menu
+        searchBreakfastBtn = findViewById(R.id.searchBreakfast);
+        searchBreakfastBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, RecipeListActivity.class));
+            }
+        });
+
 
 
 
