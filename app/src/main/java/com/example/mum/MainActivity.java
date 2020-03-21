@@ -1,28 +1,13 @@
 package com.example.mum;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.github.clans.fab.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
 import android.util.SparseBooleanArray;
-import android.view.View;
-
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.google.android.material.navigation.NavigationView;
-
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -31,45 +16,51 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.mum.CardViewIngredients.IngredientsCardViewActivity;
+import com.github.clans.fab.FloatingActionButton;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    // Autocomplete List
-    private AppBarConfiguration mAppBarConfiguration;
     AutoCompleteTextView autocomplete;
-    String[] ingredientList = {
-            "Avocado",
+
+
+
+    ListView listview;
+    String[] ListViewItems = new String[] {
             "Tomato",
             "Broccoli",
-            "Onion",
-            "Green Onion"};
+            "Apple",
+            "Orange",
+            "Papaya",
+            "Onions",
+            "Cilantro",
+            "Green Onions",
+            "Potato",
+            "Ginger"
+    };
 
+    SparseBooleanArray sparseBooleanArray ;
+
+    Button btnDeleteItems;
     ArrayList<String> mySelectedList = new ArrayList<>();
     int addIngredientFlag = 0;
-
-    ListView listViewOptions;
-    Button btnDeleteItems;
     CheckBox selectAll;
-    ArrayAdapter<String> myAdapter;
-
     FloatingActionButton searchBreakfastBtn;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
 
-        // Auto-Complete List View Functionality
-        autocomplete = findViewById(R.id.autoCompleteTextView1);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, ingredientList);
+        autocomplete = findViewById(R.id.autoCompleteTextView);
+        ArrayAdapter<String> autocompleteAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, ListViewItems);
         autocomplete.setThreshold(0);
-        autocomplete.setAdapter(adapter);
+        autocomplete.setAdapter(autocompleteAdapter);
         autocomplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -109,13 +100,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
-        // List View Functionality
-        listViewOptions = findViewById(R.id.list_view_ingredients);
-        myAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_multiple_choice, mySelectedList);
-        listViewOptions.setAdapter(myAdapter);
-
         selectAll = findViewById(R.id.selectAll);
         selectAll.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -127,45 +111,38 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if (selectAll.isChecked()){
-                    for ( int i=0; i < listViewOptions.getChildCount(); i++) {
-                        listViewOptions.setItemChecked(i, true);
+                    for ( int i=0; i < listview.getChildCount(); i++) {
+                        listview.setItemChecked(i, true);
                     }
                 }
                 else {
-                    for ( int i=0; i < listViewOptions.getChildCount(); i++) {
-                        listViewOptions.setItemChecked(i, false);
+                    for ( int i=0; i < listview.getChildCount(); i++) {
+                        listview.setItemChecked(i, false);
                     }
                 }
 
-
-
             }
         });
+
 
         // Delete Button
         btnDeleteItems = findViewById(R.id.deleteButton);
         btnDeleteItems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                SparseBooleanArray itemChecked = listViewOptions.getCheckedItemPositions();
-                for (int i = 0; i < itemChecked.size(); i++) {
-                    int key = itemChecked.keyAt(i);
-                    boolean value = itemChecked.get(key);
-                    if(value) {
-                        //mySelectedList.add((listViewOptions.getItemAtPosition(key).toString()));
-                        mySelectedList.remove(listViewOptions.getItemAtPosition(key));
-                        Toast.makeText(getApplicationContext(), "Key: " + listViewOptions.getItemAtPosition(key).toString(), Toast.LENGTH_SHORT).show();
-
-                    }
-                }
 
                 if (mySelectedList.isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Nothing is there", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Checked Items: ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Nothing to delete", Toast.LENGTH_SHORT).show();
+                }
+                else if (mySelectedList.size() >= 1) {
+                    Toast.makeText(getApplicationContext(), "List selected items " + mySelectedList.size(), Toast.LENGTH_SHORT).show();
+                    mySelectedList.clear();
+
+
                 }
             }
         });
+
 
         // Main Menu -> Search Breakfast Menu
         searchBreakfastBtn = findViewById(R.id.searchBreakfast);
@@ -179,44 +156,67 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        listview = findViewById(R.id.produceList);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>
+                (MainActivity.this,
+                        android.R.layout.simple_list_item_multiple_choice,
+                        android.R.id.text1, mySelectedList );
+
+        listview.setAdapter(adapter);
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // TODO Auto-generated method stub
+
+                sparseBooleanArray = listview.getCheckedItemPositions();
+
+                String ValueHolder = "" ;
+
+                int i = 0 ;
+
+                while (i < sparseBooleanArray.size()) {
+
+                    if (sparseBooleanArray.valueAt(i)) {
+
+                        //ValueHolder += ListViewItems [ sparseBooleanArray.keyAt(i) ] + ",";
+                        Toast.makeText(MainActivity.this, "ListView Selected Values = " + sparseBooleanArray.keyAt(i), Toast.LENGTH_LONG).show();
+
+                    }
+
+                    i++ ;
+                }
+
+                ValueHolder = ValueHolder.replaceAll("(,)*$", "");
+
+                //Toast.makeText(MainActivity.this, "ListView Selected Values = " + ValueHolder, Toast.LENGTH_LONG).show();
+
+            }
+        });
 
 
 
 
 
-
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_share, R.id.nav_send)
-                .setDrawerLayout(drawer)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+        return super.onCreateOptionsMenu(menu);
     }
+
 
     @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
-                || super.onSupportNavigateUp();
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.addIngredientButton) {
+            Toast.makeText(getApplicationContext(), "Add an Ingredient", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(MainActivity.this, IngredientsCardViewActivity.class));
+        }
+        return super.onOptionsItemSelected(item);
     }
-
-
-
-
-
-
-
 
 
 

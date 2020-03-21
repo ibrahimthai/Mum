@@ -1,0 +1,10 @@
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/addIngredientButton"
+        android:title=""
+        app:showAsAction="always"
+        android:icon="@drawable/ic_add_icon_white" />
+</menu>
