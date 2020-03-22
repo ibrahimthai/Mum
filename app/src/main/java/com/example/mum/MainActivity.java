@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
     CheckBox selectAll;
     FloatingActionButton searchBreakfastBtn;
 
-
+    ArrayList<String> mySelectedListFromIngredientsList = new ArrayList<>();
 
 
     @Override
@@ -165,8 +165,6 @@ public class MainActivity extends AppCompatActivity {
         {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                // TODO Auto-generated method stub
-
                 sparseBooleanArray = listview.getCheckedItemPositions();
 
                 String ValueHolder = "" ;

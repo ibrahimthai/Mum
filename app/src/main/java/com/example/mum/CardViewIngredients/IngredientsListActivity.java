@@ -2,8 +2,10 @@ package com.example.mum.CardViewIngredients;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -30,19 +32,7 @@ public class IngredientsListActivity extends AppCompatActivity {
     ArrayList<String> ingredientsList = new ArrayList<>();
     ListView listView;
     String data[];
-
-    String[] ListViewItems = new String[] {
-            "Tomato",
-            "Broccoli",
-            "Apple",
-            "Orange",
-            "Papaya",
-            "Onions",
-            "Cilantro",
-            "Green Onions",
-            "Potato",
-            "Ginger"
-    };
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,22 +41,21 @@ public class IngredientsListActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         myFile = intent.getStringExtra("ingredientType");
-
         listView = findViewById(R.id.ingredientsList);
 
+        // Get the data in the text file to create the list
         readData();
         System.out.println(myFile);
 
-        ArrayAdapter<String> autocompleteAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_multiple_choice, ingredientsList);
-        listView.setAdapter(autocompleteAdapter);
-
-
+        ArrayAdapter<String> listviewAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_multiple_choice, ingredientsList);
+        listView.setAdapter(listviewAdapter);
 
 
 
     }
 
 
+    // Reads the chosen text file and fill the list with ingredients
     public void readData() {
 
         InputStream inputStream;
@@ -99,6 +88,7 @@ public class IngredientsListActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         int id = item.getItemId();
 
         if (id == R.id.addAllIngredientsButton) {
