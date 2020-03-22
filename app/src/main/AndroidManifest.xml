@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_app_icon_foreground"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".CardViewIngredients.AddItemsListActivity"></activity>
+
         <!-- MainActivity will launch first when opened -->
         <activity
             android:name=".MainActivity"
@@ -28,6 +28,9 @@
         <activity
             android:name=".CardViewIngredients.IngredientsCardViewActivity"
             android:parentActivityName=".MainActivity"></activity>
+
+        <activity android:name=".CardViewIngredients.IngredientsListActivity"
+            android:parentActivityName=".CardViewIngredients.IngredientsCardViewActivity"></activity>
     </application>
 
 </manifest>

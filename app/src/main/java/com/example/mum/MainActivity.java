@@ -25,8 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
     AutoCompleteTextView autocomplete;
 
-
-
     ListView listview;
     String[] ListViewItems = new String[] {
             "Tomato",
@@ -186,10 +184,6 @@ public class MainActivity extends AppCompatActivity {
 
                     i++ ;
                 }
-
-                ValueHolder = ValueHolder.replaceAll("(,)*$", "");
-
-                //Toast.makeText(MainActivity.this, "ListView Selected Values = " + ValueHolder, Toast.LENGTH_LONG).show();
 
             }
         });

@@ -1,6 +1,7 @@
 package com.example.mum.CardViewIngredients;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,25 +39,61 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
         myHolder.textDescription.setText(models.get(i).getDescription());
         myHolder.imageView.setImageResource(models.get(i).getImage());
 
-
+        // When user clicks on the an ingredient type
         myHolder.setItemClickListener(new ItemClickListener() {
             @Override
             public void onItemClickListener(View v, int position) {
 
+                String ingredientType;
+                Intent intent = new Intent(context, IngredientsListActivity.class);
+
+                // Fruits
                 if (models.get(position).getTitle().equals("Fruits")) {
-                    System.out.println("You clicked: " + models.get(position).getTitle());
+                    ingredientType = "Fruits.txt";
+                    intent.putExtra("ingredientType", ingredientType);
+                    context.startActivity(intent);
                 }
 
+                // Vegetables
                 if (models.get(position).getTitle().equals("Vegetables")) {
-                    System.out.println("You clicked: " + models.get(position).getTitle());
+                    ingredientType = "Vegetables.txt";
+                    intent.putExtra("ingredientType", ingredientType);
+                    context.startActivity(intent);
                 }
 
+                // Dairy
                 if (models.get(position).getTitle().equals("Dairy")) {
-                    System.out.println("You clicked: " + models.get(position).getTitle());
+                    ingredientType = "";
+                    intent.putExtra("ingredientType", ingredientType);
+                    context.startActivity(intent);
                 }
 
+                // Bakery
+                if (models.get(position).getTitle().equals("Bakery")) {
+                    ingredientType = models.get(position).getTitle();
+                    intent.putExtra("ingredientType", ingredientType);
+                    context.startActivity(intent);
+                }
+
+                // Meat and Poultry
                 if (models.get(position).getTitle().equals("Meat and Poultry")) {
-                    System.out.println("You clicked: " + models.get(position).getTitle());
+                    ingredientType = models.get(position).getTitle();
+                    intent.putExtra("ingredientType", ingredientType);
+                    context.startActivity(intent);
+                }
+
+                // Fish and Seafood
+                if (models.get(position).getTitle().equals("Fish and Seafood")) {
+                    ingredientType = models.get(position).getTitle();
+                    intent.putExtra("ingredientType", ingredientType);
+                    context.startActivity(intent);
+                }
+
+                // Grains, Beans, and Nuts
+                if (models.get(position).getTitle().equals("Grains, Beans, and Nuts")) {
+                    ingredientType = models.get(position).getTitle();
+                    intent.putExtra("ingredientType", ingredientType);
+                    context.startActivity(intent);
                 }
 
             }

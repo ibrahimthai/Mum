@@ -16,15 +16,10 @@ public class IngredientsCardViewActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     MyAdapter adapter;
 
-    TextView mytext;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingredients_card_view);
-
-        //mytext = findViewById(R.id.textView);
-        //mytext.setText("Changed");
 
         recyclerView = findViewById(R.id.ingredientsRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -75,18 +70,14 @@ public class IngredientsCardViewActivity extends AppCompatActivity {
         models.add(m);
 
         m = new Model();
-        m.setTitle("Grains, Beans and Nuts");
+        m.setTitle("Grains, Beans, and Nuts");
         m.setDescription("e.g. Oat, Legumes, Cashews");
         m.setImage(R.mipmap.ic_launcher_produce_icon_foreground);
         models.add(m);
 
-
         return models;
 
     }
-
-
-
 
 
 }

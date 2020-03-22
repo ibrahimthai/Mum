@@ -1,0 +1,24 @@
+Apple
+Apricot
+Avocado
+Banana
+Blackberry
+Cantaloupe
+Cherry
+Fig
+Grapes (Red)
+Grapes (White)
+Honeydew
+Kiwi
+Lemon
+Line
+Mango
+Mangosteen
+Orange
+Papaya
+Peach
+Pineapple
+Plum
+Raisins
+Strawberry
+Watermelon

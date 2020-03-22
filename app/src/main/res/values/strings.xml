@@ -3,19 +3,4 @@
     <string name="add_ingredients_name">Add Ingredients</string>
 
 
-    <string-array name="dietary_types">
-
-        <item>Peanut-Free</item>
-        <item>Gluten-Free</item>
-        <item>Vegetarian</item>
-        <item>Vegan</item>
-    </string-array>
-
-    <string-array name="dietary_description">
-        <item>No Peanut Allergies</item>
-        <item>No gluten</item>
-        <item>Veggies with Dairy</item>
-        <item>Full On Greens</item>
-    </string-array>
-
 </resources>

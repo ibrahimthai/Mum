@@ -1,0 +1,35 @@
+Artichoke
+Asparagus
+Bamboo Shoots
+Beet
+Bell Pepper (Red)
+Bell Pepper (Yellow)
+Bell Pepper (Green)
+Bok Choy
+Broccoli
+Brussels Sprouts
+Cabbage (Green)
+Cabbage (Savoy)
+Cabbage (Red)
+Cabbage (Nappa)
+Carrots
+Carrots (Baby)
+Cauliflower
+Celery
+Cucumber
+Eggplant
+Garlic
+Lettuce (Iceberg)
+Lettuce (Romaine)
+Mushrooms
+Onion (White)
+Onion (Sweet)
+Peas
+Potatoes (White)
+Potatoes (Yellow)
+Pumpkins
+Spinach
+Green Beans
+Turnip
+Yam
+Zucchini
