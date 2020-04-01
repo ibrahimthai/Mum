@@ -1,0 +1,21 @@
+Bacon
+Chicken
+Chicken Wings
+Goat
+Ground Beef
+Ham
+Ham (Deli-Meat)
+Lamb
+Pepperoni
+Pheasant
+Pork
+Ribs (Beef)
+Ribs (Pork)
+Roast
+Roast (Deli-Meat)
+Quail
+Salami
+Steak
+Sausage
+Turkey
+Turkey (Deli-Meat)

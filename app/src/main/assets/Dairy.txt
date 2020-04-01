@@ -1,0 +1,32 @@
+Almond Milk
+Butter
+Casein
+Cheese (Camembert)
+Cheese (Cheddar)
+Cheese (Chèvre)
+Cheese (Cotija)
+Cheese (Cottage)
+Cheese (Emmental)
+Cheese (Feta)
+Cheese (Gouda)
+Cheese (Manchego)
+Cheese (Monterey Jack)
+Cheese (Mozzarella)
+Cheese (Parmesan)
+Cheese (Parmigiano-Reggiano)
+Cheese (Roquefort)
+Cheese (Taleggio)
+Cream
+Cream Cheese
+Eggs
+Ice Cream
+Margarine
+Milk
+Quail Eggs
+Sour Cream
+Soy Milk
+Sweetened Condensed Milk
+Tzatziki
+Whipped Cream
+Whey
+Yogurt
