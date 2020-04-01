@@ -63,35 +63,39 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
 
                 // Dairy
                 if (models.get(position).getTitle().equals("Dairy")) {
-                    ingredientType = "";
+                    ingredientType = "Dairy.txt";
                     intent.putExtra("ingredientType", ingredientType);
                     context.startActivity(intent);
                 }
 
                 // Bakery
                 if (models.get(position).getTitle().equals("Bakery")) {
-                    ingredientType = models.get(position).getTitle();
+                    //ingredientType = models.get(position).getTitle();
+                    ingredientType = "Bakery.txt";
                     intent.putExtra("ingredientType", ingredientType);
                     context.startActivity(intent);
                 }
 
                 // Meat and Poultry
                 if (models.get(position).getTitle().equals("Meat and Poultry")) {
-                    ingredientType = models.get(position).getTitle();
+                    //ingredientType = models.get(position).getTitle();
+                    ingredientType = "Meats and Poultry.txt";
                     intent.putExtra("ingredientType", ingredientType);
                     context.startActivity(intent);
                 }
 
                 // Fish and Seafood
                 if (models.get(position).getTitle().equals("Fish and Seafood")) {
-                    ingredientType = models.get(position).getTitle();
+                    //ingredientType = models.get(position).getTitle();
+                    ingredientType = "Fish and Seafood.txt";
                     intent.putExtra("ingredientType", ingredientType);
                     context.startActivity(intent);
                 }
 
                 // Grains, Beans, and Nuts
                 if (models.get(position).getTitle().equals("Grains, Beans, and Nuts")) {
-                    ingredientType = models.get(position).getTitle();
+                    //ingredientType = models.get(position).getTitle();
+                    ingredientType = "Grains&Beans.txt";
                     intent.putExtra("ingredientType", ingredientType);
                     context.startActivity(intent);
                 }
