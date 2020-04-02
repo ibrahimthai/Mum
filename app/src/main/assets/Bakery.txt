@@ -1,10 +1,14 @@
 Bagel
 Baguette
+Baking Powder
+Baking Soda
 Bread (Brown)
 Bread Crumbs
 Bread (White)
+Cream of Tartar
 Croissant
 Egg Noodles
 Pasta
 Ramen Noodles
 Soba Noodles
+Sugar
