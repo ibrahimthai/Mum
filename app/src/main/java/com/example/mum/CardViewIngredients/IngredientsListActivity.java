@@ -31,8 +31,6 @@ public class IngredientsListActivity extends AppCompatActivity {
     String myFile;
     ArrayList<String> ingredientsList = new ArrayList<>();
     ListView listView;
-    String data[];
-    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

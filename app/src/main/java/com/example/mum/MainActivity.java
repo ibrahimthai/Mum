@@ -14,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CheckedTextView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import com.example.mum.DBHelper.DBIngredientsHelper;
 import com.github.clans.fab.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -50,17 +52,19 @@ public class MainActivity extends AppCompatActivity {
 
     DBIngredientsHelper myIngredientsDB;
 
+    ArrayList<String> list = new ArrayList<>();
+    ArrayList<Integer> IDs = new ArrayList<>();
+    ArrayList<Ingredients> ingredientsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //getIngredients();
-
         myIngredientsDB = new DBIngredientsHelper(this);
         getIngredients();
 
+        // Auto-Complete ingredient suggestion
         autocomplete = findViewById(R.id.autoCompleteTextView);
         ArrayAdapter<String> autocompleteAdapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1, ListViewItems);
         autocomplete.setThreshold(0);
@@ -72,11 +76,6 @@ public class MainActivity extends AppCompatActivity {
 
                 // here is your selected item
                 System.out.println("You chose: " + selectedItem);
-
-                //getIngredients();
-
-
-
 
 
                 // If list is empty, add an item without going through duplicate check
@@ -126,13 +125,17 @@ public class MainActivity extends AppCompatActivity {
                 if (selectAll.isChecked()){
                     for ( int i=0; i < listview.getChildCount(); i++) {
                         listview.setItemChecked(i, true);
+                        getItemList();
                     }
                 }
                 else {
                     for ( int i=0; i < listview.getChildCount(); i++) {
                         listview.setItemChecked(i, false);
+                        getItemList();
                     }
                 }
+
+
 
             }
         });
@@ -148,8 +151,18 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Nothing to delete", Toast.LENGTH_SHORT).show();
                 }
                 else if (mySelectedList.size() >= 1) {
-                    Toast.makeText(getApplicationContext(), "List selected items " + mySelectedList.size(), Toast.LENGTH_SHORT).show();
-                    mySelectedList.clear();
+                    Toast.makeText(getApplicationContext(), "Item deleted", Toast.LENGTH_SHORT).show();
+
+                    for (int i = 0; i < IDs.size(); i++) {
+                        myIngredientsDB.deleteIngredients(IDs.get(i));
+                        getItemList();
+                        //System.out.println("ID's to delete: " + IDs.get(i));
+                    }
+
+                    // Refresh activity once they delete
+                    finish();
+                    startActivity(getIntent());
+
 
 
                 }
@@ -167,8 +180,6 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
-
         listview = findViewById(R.id.produceList);
         ArrayAdapter<String> adapter = new ArrayAdapter<>
                 (MainActivity.this,
@@ -180,24 +191,13 @@ public class MainActivity extends AppCompatActivity {
         {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                sparseBooleanArray = listview.getCheckedItemPositions();
 
-                int i = 0 ;
-
-                while (i < sparseBooleanArray.size()) {
-
-                    if (sparseBooleanArray.valueAt(i)) {
-
-                        //ValueHolder += ListViewItems [ sparseBooleanArray.keyAt(i) ] + ",";
-                        Toast.makeText(MainActivity.this, "ListView Selected Values = " + sparseBooleanArray.keyAt(i), Toast.LENGTH_LONG).show();
-
-                    }
-
-                    i++ ;
-                }
-
+                // Gets the items from the database and put on list
+                getItemList();
             }
         });
+
+
 
 
     } // End of OnCreate
@@ -239,22 +239,65 @@ public class MainActivity extends AppCompatActivity {
     public void getIngredients () {
 
         Cursor cursor = myIngredientsDB.getListContents();
+        ingredientsList = new ArrayList<>();
+        Ingredients addIngredient;
 
         if (cursor.moveToFirst()) {
             do {
                 // Create new recipe object and add to it using information from query result
-                // Integer.parseInt(cursor.getString(0))
-                //System.out.println(Integer.parseInt(cursor.getString(0)));
-                System.out.println();
-                System.out.println(cursor.getString(1));
                 mySelectedList.add(cursor.getString(1));
+
+                addIngredient = new Ingredients(null, 0);
+                addIngredient.setID(Integer.parseInt(cursor.getString(0)));
+                addIngredient.setIngredientName(cursor.getString(1));
+                ingredientsList.add(addIngredient);
+
+                //System.out.println("Database");
+                System.out.println("ID: " + Integer.parseInt(cursor.getString(0)));
+                System.out.println("Ingredient: " + cursor.getString(1));
+
+
             } while (cursor.moveToNext());
         }
 
         cursor.close();
 
+        /*
+        for(int i = 0; i < ingredientsList.size(); i++) {
+            System.out.println(ingredientsList.get(i).ID + " " + ingredientsList.get(i).ingredientName);
+        }
+        */
+
     }
 
+    // Displays all the list of items that are checked
+    public void getItemList() {
+
+        sparseBooleanArray = listview.getCheckedItemPositions();
+
+        // Clear ID list to refresh the latest checked boxes
+        IDs.clear();
+
+        int i;
+        StringBuilder stringBuilderIngredient = new StringBuilder();
+
+        for(i=0;i<sparseBooleanArray.size();i++){
+            if(sparseBooleanArray.valueAt(i)==true){
+                String stringIngredient = ((CheckedTextView) listview.getChildAt(i)).getText().toString();
+                stringBuilderIngredient = stringBuilderIngredient.append(stringIngredient + ",");
+                IDs.add(ingredientsList.get(i).getID());
+                //System.out.println("Selected ID: " + ingredientsList.get(i).getID());
+            }
+        }
+
+
+        String[] values = stringBuilderIngredient.toString().split(",");
+        list = new ArrayList(Arrays.asList(values));
+        System.out.println();
+        System.out.println(list.toString());
+        System.out.println(IDs.toString());
+
+    }
 
 
 
