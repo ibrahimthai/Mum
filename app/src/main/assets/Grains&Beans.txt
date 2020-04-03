@@ -1,0 +1,12 @@
+Almonds
+Beans (Black)
+Beans (Kidney)
+Beans (String)
+Flour
+Peanuts
+Rice (Basmati)
+Rice (Brown)
+Rice (Jasmine)
+Rice (White)
+Rice (Wild)
+Walnuts
