@@ -31,10 +31,6 @@ public class RecipesFragment extends Fragment {
 
 
 
-
-
-
-
   }
 
 
@@ -101,8 +97,6 @@ public class RecipesFragment extends Fragment {
 
     adapter = new MyAdapter(this.getContext(), getMyList());
     recyclerView.setAdapter(adapter);
-
-
     // Inflate the layout for this fragment
     return view;
   }

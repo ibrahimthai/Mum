@@ -113,4 +113,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
     public int getItemCount() {
         return models.size();
     }
+
+    public void filterList(ArrayList<Model> filteredList)
+    {
+
+        models = filteredList;
+        notifyDataSetChanged();
+
+    }
 }
