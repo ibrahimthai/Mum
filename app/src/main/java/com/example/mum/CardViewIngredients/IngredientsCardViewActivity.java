@@ -24,7 +24,7 @@ public class IngredientsCardViewActivity extends AppCompatActivity {
         recyclerView = findViewById(R.id.ingredientsRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        adapter = new MyAdapter(this, getMyList());
+        adapter = new MyAdapter(this, getMyList(), "IngredientsListActivity");
         recyclerView.setAdapter(adapter);
 
     }

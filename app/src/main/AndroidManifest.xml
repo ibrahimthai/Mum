@@ -26,13 +26,16 @@
         <activity
             android:name=".RecipeListActivity"
             android:label="@string/add_ingredients_name"
-            android:parentActivityName=".MainActivity"></activity> <!-- Ingredients List Activity -> MainActivity -->
+            android:parentActivityName=".MainActivity" /> <!-- Ingredients List Activity -> MainActivity -->
         <activity
             android:name=".CardViewIngredients.IngredientsCardViewActivity"
-            android:parentActivityName=".MainActivity"></activity>
-
-        <activity android:name=".CardViewIngredients.IngredientsListActivity"
-            android:parentActivityName=".CardViewIngredients.IngredientsCardViewActivity"></activity>
+            android:parentActivityName=".MainActivity" />
+        <activity
+            android:name=".CardViewIngredients.IngredientsListActivity"
+            android:parentActivityName=".CardViewIngredients.IngredientsCardViewActivity" />
+        <activity
+            android:name=".RecipeDetailActivity"
+            android:parentActivityName=".RecipeListActivity"/>
     </application>
 
 </manifest>

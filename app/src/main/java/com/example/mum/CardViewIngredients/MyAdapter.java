@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mum.R;
+import com.example.mum.RecipeDetailActivity;
 
 import java.util.ArrayList;
 
@@ -19,10 +20,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
 
     private Context context;
     private ArrayList<Model> models;
+    private String activityType;
 
-    public MyAdapter(Context context, ArrayList<Model> models) {
+    public MyAdapter(Context context, ArrayList<Model> models, String activityType) {
         this.context = context;
         this.models = models;
+        this.activityType = activityType;
+
     }
 
     @NonNull
@@ -46,60 +50,61 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
             public void onItemClickListener(View v, int position) {
 
                 String ingredientType;
-                Intent intent = new Intent(context, IngredientsListActivity.class);
+                Intent ingredientListIntent = new Intent(context, IngredientsListActivity.class);
+                Intent recipeDetailIntent = new Intent(context, RecipeDetailActivity.class);
 
                 // Fruits
                 if (models.get(position).getTitle().equals("Fruits")) {
                     ingredientType = "Fruits.txt";
-                    intent.putExtra("ingredientType", ingredientType);
-                    context.startActivity(intent);
+                    ingredientListIntent.putExtra("ingredientType", ingredientType);
+                    context.startActivity(ingredientListIntent);
                 }
 
                 // Vegetables
                 if (models.get(position).getTitle().equals("Vegetables")) {
                     ingredientType = "Vegetables.txt";
-                    intent.putExtra("ingredientType", ingredientType);
-                    context.startActivity(intent);
+                    ingredientListIntent.putExtra("ingredientType", ingredientType);
+                    context.startActivity(ingredientListIntent);
                 }
 
                 // Dairy
                 if (models.get(position).getTitle().equals("Dairy")) {
                     ingredientType = "Dairy.txt";
-                    intent.putExtra("ingredientType", ingredientType);
-                    context.startActivity(intent);
+                    ingredientListIntent.putExtra("ingredientType", ingredientType);
+                    context.startActivity(ingredientListIntent);
                 }
 
                 // Bakery
                 if (models.get(position).getTitle().equals("Bakery")) {
-                    //ingredientType = models.get(position).getTitle();
                     ingredientType = "Bakery.txt";
-                    intent.putExtra("ingredientType", ingredientType);
-                    context.startActivity(intent);
+                    ingredientListIntent.putExtra("ingredientType", ingredientType);
+                    context.startActivity(ingredientListIntent);
                 }
 
                 // Meat and Poultry
                 if (models.get(position).getTitle().equals("Meat and Poultry")) {
-                    //ingredientType = models.get(position).getTitle();
                     ingredientType = "Meats and Poultry.txt";
-                    intent.putExtra("ingredientType", ingredientType);
-                    context.startActivity(intent);
+                    ingredientListIntent.putExtra("ingredientType", ingredientType);
+                    context.startActivity(ingredientListIntent);
                 }
 
                 // Fish and Seafood
                 if (models.get(position).getTitle().equals("Fish and Seafood")) {
-                    //ingredientType = models.get(position).getTitle();
                     ingredientType = "Fish and Seafood.txt";
-                    intent.putExtra("ingredientType", ingredientType);
-                    context.startActivity(intent);
+                    ingredientListIntent.putExtra("ingredientType", ingredientType);
+                    context.startActivity(ingredientListIntent);
                 }
 
                 // Grains, Beans, and Nuts
                 if (models.get(position).getTitle().equals("Grains, Beans, and Nuts")) {
-                    //ingredientType = models.get(position).getTitle();
                     ingredientType = "Grains&Beans.txt";
-                    intent.putExtra("ingredientType", ingredientType);
-                    context.startActivity(intent);
+                    ingredientListIntent.putExtra("ingredientType", ingredientType);
+                    context.startActivity(ingredientListIntent);
                 }
+
+
+
+
 
             }
         });
