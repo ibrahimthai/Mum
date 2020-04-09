@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.SparseBooleanArray;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,9 +20,12 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.mum.CardViewIngredients.IngredientsCardViewActivity;
+import com.example.mum.DBHelper.DBFavoritesHelper;
 import com.example.mum.DBHelper.DBIngredientsHelper;
+import com.example.mum.DBHelper.DBRecipeHelper;
 import com.github.clans.fab.FloatingActionButton;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -51,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton searchBreakfastBtn;
 
     DBIngredientsHelper myIngredientsDB;
+    public DBRecipeHelper myFavoritesDB;
 
     ArrayList<String> list = new ArrayList<>();
     ArrayList<Integer> IDs = new ArrayList<>();
@@ -63,6 +68,7 @@ public class MainActivity extends AppCompatActivity {
 
         myIngredientsDB = new DBIngredientsHelper(this);
         getIngredients();
+        myFavoritesDB = new DBRecipeHelper(this);
 
         // Auto-Complete ingredient suggestion
         autocomplete = findViewById(R.id.autoCompleteTextView);

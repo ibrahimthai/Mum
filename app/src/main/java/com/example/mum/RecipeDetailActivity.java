@@ -3,9 +3,16 @@ package com.example.mum;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.mum.DBHelper.DBFavoritesHelper;
+import com.example.mum.DBHelper.DBRecipeHelper;
 
 public class RecipeDetailActivity extends AppCompatActivity {
 
@@ -22,29 +29,34 @@ public class RecipeDetailActivity extends AppCompatActivity {
     private String recipeCompletionTime;
     private String recipeIngredients;
     private String recipeInstructions;
+    private String recipeDrawable;
 
+    ImageButton favoriteButton;
+
+    DBRecipeHelper myFavoritesDB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
+
+        Context context = getApplicationContext();
+        myFavoritesDB = new DBRecipeHelper(context);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_detail);
-
         init();
         getData();
-
-        if (recipeTitle.equals("Scrambled Eggs"))
-            mImageView.setImageResource(R.drawable.scrambled_eggs);
-        else if (recipeTitle.equals("Fried Bacon"))
-            mImageView.setImageResource(R.drawable.fried_bacon);
-        else if (recipeTitle.equals("Sheepherders"))
-            mImageView.setImageResource(R.drawable.sheepherders_breakfast);
 
         System.out.println(recipeTitle);
         System.out.println(recipeCalories);
         System.out.println(recipeCompletionTime);
         System.out.println(recipeIngredients);
         System.out.println(recipeInstructions);
+        System.out.println(recipeDrawable);
 
+        int drawableId = getResources().getIdentifier(recipeDrawable, "drawable", getPackageName());
+
+        mImageView.setImageResource(drawableId);
         title.setText(recipeTitle);
         calories.setText(recipeCalories);
         completionTime.setText(recipeCompletionTime);
@@ -63,6 +75,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
         recipeCompletionTime = b.getString("COMPLETIONTIME");
         recipeIngredients = b.getString("INGREDIENTS");
         recipeInstructions = b.getString("INSTRUCTIONS");
+        recipeDrawable = b.getString("DRAWABLE");
     }
 
     // Initializes all buttons, texts, and image view
@@ -73,8 +86,17 @@ public class RecipeDetailActivity extends AppCompatActivity {
         ingredients = findViewById(R.id.recipeIngredients);
         instructions = findViewById(R.id.recipeInstructions);
         mImageView = findViewById(R.id.foodImage);
+
+        favoriteButton = findViewById(R.id.imageButton);
+
+        favoriteButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                myFavoritesDB.addRecipe( recipeTitle, recipeCalories, recipeCompletionTime, recipeIngredients, recipeInstructions,recipeDrawable);
+
+            }
+        });
+
     }
-
-
 
 }

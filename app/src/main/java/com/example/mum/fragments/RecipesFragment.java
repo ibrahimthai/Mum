@@ -113,14 +113,16 @@ public class RecipesFragment extends Fragment {
             "100 Calories",
             "5 Minutes",
             "- Eggs\n",
-            "1. Mix eggs\n2. Fry in pan\n");
+            "1. Mix eggs\n2. Fry in pan\n",
+            "scrambled_eggs");
 
     insertData2 = dbRecipeHelper.addRecipe(
             "Fried Bacon",
             "300 Calories",
             "1 Hour",
             "- Bacon\n",
-            "1. Fry bacon\n");
+            "1. Fry bacon\n",
+            "fried_bacon");
 
     insertData3 = dbRecipeHelper.addRecipe(
             "Sheepherders",
@@ -135,7 +137,7 @@ public class RecipesFragment extends Fragment {
                       "- 1 cup Kerrygold shredded cheddar cheese\n",
             "1. In a large skillet, cook bacon and onion over medium heat until bacon is crisp. Drain, reserving 1/4 cup drippings in pan.\n\n" +
                       "2. Stir in hash browns. Cook, uncovered, over medium heat until bottom is golden brown, about 10 minutes. Turn potatoes. With the back of a spoon, make 8 evenly spaced wells in potato mixture. Break 1 egg into each well. Sprinkle with salt and pepper.\n\n" +
-                      "3. Cook, covered, on low until eggs are set and potatoes are tender, about 10 minutes. Sprinkle with cheese; let stand until cheese is melted.\n");
+                      "3. Cook, covered, on low until eggs are set and potatoes are tender, about 10 minutes. Sprinkle with cheese; let stand until cheese is melted.\n","sheepherders_breakfast");
 
 
 

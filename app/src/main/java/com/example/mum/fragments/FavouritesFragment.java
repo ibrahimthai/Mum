@@ -1,5 +1,6 @@
 package com.example.mum.fragments;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mum.CardViewIngredients.Model;
 import com.example.mum.CardViewIngredients.MyAdapter;
+import com.example.mum.DBHelper.DBFavoritesHelper;
+import com.example.mum.DBHelper.DBRecipeHelper;
 import com.example.mum.R;
 import com.example.mum.RecipeHelper.RecipeAdapter;
 
@@ -37,10 +40,14 @@ public class FavouritesFragment extends Fragment {
     private View view;
     private String searchInput;
     private ArrayList<Model> models;
+    private DBRecipeHelper favoriteDB;
 //Favorite list will contain all the numbers, this will query the db, then display to recycler view.
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
+        favoriteDB = new DBRecipeHelper(this.getContext());
+
         super.onCreate(savedInstanceState);
         getActivity().setTitle("Favourites");
         setContentView(R.layout.fragment_favourites);
@@ -114,7 +121,7 @@ public class FavouritesFragment extends Fragment {
         recyclerView = view.findViewById(R.id.my_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        adapter = new RecipeAdapter(this.getContext(), getMyList(), "FavouritesFragment.class");
+        adapter = new RecipeAdapter(this.getContext(), getMyList(),"FavouritesFragment.class");
         recyclerView.setAdapter(adapter);
 
          return view;
@@ -128,78 +135,37 @@ public class FavouritesFragment extends Fragment {
         return fragment;
     }
 
-    private void writeFavorites(String newFavId, File file)
-    {
-
-        FileOutputStream stream = null;
-        try {
-            stream = new FileOutputStream(file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            Log.i("ERROR WRITE", "Unable to open write stream;");
-        }
-
-        try {
-            stream.write(newFavId.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.i("ERROR WRITE", "Unable to write stream;");
-        }
-        try {
-            stream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-            Log.i("ERROR WRITE", "Unable to close write stream;");
-        }
-
-    }
-
     private ArrayList<Model> getMyList() {
 
         models = new ArrayList<>();
 
-        Model m = new Model();
-        m.setTitle("Fruits");
-        m.setDescription("e.g. Apples, Oranges, Peaches");
-        m.setImage(R.mipmap.ic_launcher_produce_icon_foreground);
-        models.add(m);
+        Cursor cursor = favoriteDB.getListContents();
+        System.out.println("Num of Recipes: " + cursor.getCount());
 
-        m = new Model();
-        m.setTitle("Vegetables");
-        m.setDescription("e.g. Tomatoes, Onions, Potatoes");
-        m.setImage(R.mipmap.ic_launcher_produce_icon_foreground);
-        models.add(m);
+        if(cursor != null)
+        {
 
-        m = new Model();
-        m.setTitle("Dairy");
-        m.setDescription("e,g, Milk, Cheese, Yogurt");
-        m.setImage(R.mipmap.ic_launcher_produce_icon_foreground);
-        models.add(m);
+            try {
+                do
+                {
 
-        m = new Model();
-        m.setTitle("Bakery");
-        m.setDescription("e.g. Bread, Baguette, Bagel");
-        m.setImage(R.mipmap.ic_launcher_produce_icon_foreground);
-        models.add(m);
+                    Model m = new Model();
+                    Log.d("FAVES", "1 ");
+                    m.setTitle(cursor.getString( cursor.getColumnIndex("title") ));
+                    Log.d("FAVES", "2");
+                    m.setDescription(cursor.getString( cursor.getColumnIndex("COLUMN_CALORIES"))+ " Calroies" );
+                    Log.d("FAVES", "3 ");
+                    int drawableId = getResources().getIdentifier(cursor.getString( cursor.getColumnIndex("COLUMN_DRAWABLE") ), "drawable", getContext().getPackageName());
+                    Log.d("FAVES", "4  ");
+                    m.setImage(drawableId);
+                    models.add(m);
 
-        m = new Model();
-        m.setTitle("Meat and Poultry");
-        m.setDescription("e.g. Beef, Chicken, Pork");
-        m.setImage(R.mipmap.ic_launcher_produce_icon_foreground);
-        models.add(m);
+                }while (cursor.moveToNext());
+            } catch (Exception e) {
+                Log.d("FAVES", "Error while making list ");
+            }
 
-        m = new Model();
-        m.setTitle("Fish and Seafood");
-        m.setDescription("e.g. Salmon, Tuna, Crab");
-        m.setImage(R.mipmap.ic_launcher_produce_icon_foreground);
-        models.add(m);
-
-        m = new Model();
-        m.setTitle("Grains, Beans, and Nuts");
-
-        m.setDescription("e.g. Oat, Legumes, Cashews");
-        m.setImage(R.mipmap.ic_launcher_produce_icon_foreground);
-        models.add(m);
+        }
 
         return models;
 

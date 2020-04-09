@@ -119,11 +119,4 @@ public class MyAdapter extends RecyclerView.Adapter<MyHolder> {
         return models.size();
     }
 
-    public void filterList(ArrayList<Model> filteredList)
-    {
-
-        models = filteredList;
-        notifyDataSetChanged();
-
-    }
 }
