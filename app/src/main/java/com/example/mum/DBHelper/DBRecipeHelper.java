@@ -5,8 +5,11 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 public class DBRecipeHelper extends SQLiteOpenHelper {
+
+    private static DBRecipeHelper sInstance;
 
     public static final String DATABASE_NAME = "Recipes.db";
     public static final String TABLE_NAME = "BreakfastRecipes";
@@ -16,6 +19,7 @@ public class DBRecipeHelper extends SQLiteOpenHelper {
     public static final String COLUMN_COMPLETION_TIME = "COMPLETIONTIME";
     public static final String COLUMN_INGREDIENTS = "INGREDIENTS";
     public static final String COLUMN_INSTRUCTIONS = "INSTRUCTIONS";
+    public static final String COLUMN_DRAWABLE = "DRAWABLE";
 
     // Constructor
     public DBRecipeHelper(Context context) {
@@ -30,7 +34,8 @@ public class DBRecipeHelper extends SQLiteOpenHelper {
                 + COLUMN_CALORIES + " TEXT, "
                 + COLUMN_COMPLETION_TIME + " TEXT, "
                 + COLUMN_INGREDIENTS + " TEXT, "
-                + COLUMN_INSTRUCTIONS + " TEXT)");
+                + COLUMN_INSTRUCTIONS + " TEXT, "
+                + COLUMN_DRAWABLE+ "TEXT)");
         System.out.println("TABLE CREATED");
     }
 
@@ -41,7 +46,7 @@ public class DBRecipeHelper extends SQLiteOpenHelper {
     }
 
 
-    public boolean addRecipe(String title, String calories, String completionTime, String ingredients, String instructions) {
+    public boolean addRecipe(String title, String calories, String completionTime, String ingredients, String instructions,String drawable) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_TITLE, title);
@@ -49,7 +54,8 @@ public class DBRecipeHelper extends SQLiteOpenHelper {
         contentValues.put(COLUMN_COMPLETION_TIME, completionTime);
         contentValues.put(COLUMN_INGREDIENTS, ingredients);
         contentValues.put(COLUMN_INSTRUCTIONS, instructions);
-
+        contentValues.put(COLUMN_DRAWABLE, drawable);
+        Log.i("DRAWWS:", drawable);
         long result = db.insert(TABLE_NAME, null, contentValues);
 
         //if date as inserted incorrectly it will return -1
@@ -75,6 +81,16 @@ public class DBRecipeHelper extends SQLiteOpenHelper {
         return data;
     }
 
+    public static synchronized DBRecipeHelper getInstance(Context context) {
+        // Use the application context, which will ensure that you
+        // don't accidentally leak an Activity's context.
+        // See this article for more information: http://bit.ly/6LRzfx
+        if (sInstance == null) {
+            sInstance = new DBRecipeHelper(context.getApplicationContext());
+        }
+        return sInstance;
+
+    }
 
 
 }
