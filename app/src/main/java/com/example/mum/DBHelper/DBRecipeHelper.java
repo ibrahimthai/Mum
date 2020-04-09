@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBRecipeHelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "breakfastRecipes.db";
+    public static final String DATABASE_NAME = "Recipes.db";
     public static final String TABLE_NAME = "BreakfastRecipes";
     public static final String COLUMN_ID = "ID";
     public static final String COLUMN_TITLE = "TITLE";
@@ -41,10 +41,14 @@ public class DBRecipeHelper extends SQLiteOpenHelper {
     }
 
 
-    public boolean addRecipe(String title, String completionTime, String ingredients, String instructions, byte[] image) {
+    public boolean addRecipe(String title, String calories, String completionTime, String ingredients, String instructions) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(COLUMN_TITLE, title);
+        contentValues.put(COLUMN_CALORIES, calories);
+        contentValues.put(COLUMN_COMPLETION_TIME, completionTime);
+        contentValues.put(COLUMN_INGREDIENTS, ingredients);
+        contentValues.put(COLUMN_INSTRUCTIONS, instructions);
 
         long result = db.insert(TABLE_NAME, null, contentValues);
 
@@ -54,6 +58,15 @@ public class DBRecipeHelper extends SQLiteOpenHelper {
         } else {
             return true;
         }
+    }
+
+    // SELECT * FROM Customers WHERE CustomerName='Around the Horn';
+    public Cursor getRecipeContents(String title){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor data = db.rawQuery("SELECT * FROM " + TABLE_NAME
+                + " WHERE " + COLUMN_TITLE
+                + "=" + "'" + title + "';", null);
+        return data;
     }
 
     public Cursor getListContents(){
