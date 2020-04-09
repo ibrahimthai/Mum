@@ -35,7 +35,7 @@ public class DBRecipeHelper extends SQLiteOpenHelper {
                 + COLUMN_COMPLETION_TIME + " TEXT, "
                 + COLUMN_INGREDIENTS + " TEXT, "
                 + COLUMN_INSTRUCTIONS + " TEXT, "
-                + COLUMN_DRAWABLE+ "TEXT)");
+                + COLUMN_DRAWABLE + " TEXT)");
         System.out.println("TABLE CREATED");
     }
 
