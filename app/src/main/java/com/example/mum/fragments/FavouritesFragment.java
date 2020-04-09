@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mum.CardViewIngredients.Model;
 import com.example.mum.CardViewIngredients.MyAdapter;
 import com.example.mum.R;
+import com.example.mum.RecipeHelper.RecipeAdapter;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -30,7 +31,7 @@ public class FavouritesFragment extends Fragment {
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager layoutManager;
     // this to the recipe type.
-    private MyAdapter adapter;
+    private RecipeAdapter adapter;
     private List favoriteList;
     private File path;
     private View view;
@@ -113,7 +114,7 @@ public class FavouritesFragment extends Fragment {
         recyclerView = view.findViewById(R.id.my_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this.getContext()));
 
-        adapter = new MyAdapter(this.getContext(), getMyList());
+        adapter = new RecipeAdapter(this.getContext(), getMyList(), "FavouritesFragment.class");
         recyclerView.setAdapter(adapter);
 
          return view;
