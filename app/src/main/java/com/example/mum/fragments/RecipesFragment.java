@@ -92,6 +92,14 @@ public class RecipesFragment extends Fragment {
       System.out.println("Recipes already there");
     }
 
+
+    
+
+
+
+
+
+
     // Inflate the layout for this fragment
     return view;
   }
