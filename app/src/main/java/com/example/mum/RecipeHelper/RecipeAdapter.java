@@ -144,4 +144,10 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeHolder> {
     public int getItemCount() {
         return models.size();
     }
+
+    public void filterList(ArrayList<Model> filteredList){
+        models = filteredList;
+        notifyDataSetChanged();;
+    }
+
 }
