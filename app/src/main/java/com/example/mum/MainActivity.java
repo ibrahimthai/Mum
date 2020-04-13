@@ -53,6 +53,9 @@ public class MainActivity extends AppCompatActivity {
     int addIngredientFlag = 0;
     CheckBox selectAll;
     FloatingActionButton searchBreakfastBtn;
+    FloatingActionButton searchLunchBtn;
+    FloatingActionButton searchDinnerBtn;
+    FloatingActionButton searchDessertBtn;
 
     DBIngredientsHelper myIngredientsDB;
     public DBRecipeHelper myFavoritesDB;
@@ -185,6 +188,32 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // Main Menu -> Search Lunch Menu
+        searchLunchBtn = findViewById(R.id.searchLunch);
+        searchLunchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, RecipeListActivity.class));
+            }
+        });
+
+        // Main Menu -> Search Dessert Menu
+        searchDessertBtn = findViewById(R.id.searchDessert);
+        searchDessertBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, RecipeListActivity.class));
+            }
+        });
+
+        // Main Menu -> Search Dinner Menu
+        searchDinnerBtn = findViewById(R.id.searchDinner);
+        searchDinnerBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, RecipeListActivity.class));
+            }
+        });
 
         listview = findViewById(R.id.produceList);
         ArrayAdapter<String> adapter = new ArrayAdapter<>
