@@ -39,7 +39,6 @@ public class RecipeDetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
 
-
         Context context = getApplicationContext();
         myFavoritesDB = new DBRecipeHelper(context);
         super.onCreate(savedInstanceState);
@@ -54,9 +53,6 @@ public class RecipeDetailActivity extends AppCompatActivity {
         System.out.println(recipeInstructions);
         System.out.println(recipeDrawable);
 
-        int drawableId = getResources().getIdentifier(recipeDrawable, "drawable", getPackageName());
-
-        mImageView.setImageResource(drawableId);
         title.setText(recipeTitle);
         calories.setText(recipeCalories);
         completionTime.setText(recipeCompletionTime);
@@ -75,7 +71,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
         recipeCompletionTime = b.getString("COMPLETIONTIME");
         recipeIngredients = b.getString("INGREDIENTS");
         recipeInstructions = b.getString("INSTRUCTIONS");
-        recipeDrawable = b.getString("DRAWABLE");
+
     }
 
     // Initializes all buttons, texts, and image view

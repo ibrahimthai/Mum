@@ -41,7 +41,7 @@ public class SearchFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_search, container, false);
 
-        final EditText searchField = (EditText)view.findViewById(R.id.editText);
+        final EditText searchField = (EditText)view.findViewById(R.id.searchTextView);
 
         searchField.addTextChangedListener(new TextWatcher() {
             @Override
@@ -75,7 +75,7 @@ public class SearchFragment extends Fragment {
 
     private ArrayList<Model> getMyList() {
 
-        models = new ArrayList<>();
+        ArrayList<Model> models = new ArrayList<>();
 
         Model m = new Model();
         m.setTitle("Scrambled Eggs");
@@ -87,6 +87,12 @@ public class SearchFragment extends Fragment {
         m.setTitle("Fried Bacon");
         m.setDescription("300 Calories");
         m.setImage(R.drawable.fried_bacon);
+        models.add(m);
+
+        m = new Model();
+        m.setTitle("Sheepherders");
+        m.setDescription("800 Calories");
+        m.setImage(R.drawable.sheepherders_breakfast);
         models.add(m);
 
         return models;
